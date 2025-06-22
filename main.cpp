@@ -13,7 +13,6 @@ struct User {
     string alamat;
 };
 
-struct a;
 
 User users[MAX_USERS];
 int userCount = 0;
