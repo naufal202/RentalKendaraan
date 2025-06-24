@@ -100,6 +100,7 @@ void printQueue();
 void insertionSortMobil(bool ascending);
 void insertionSortMotor(bool ascending);
 void updateKendaraan();
+void searchKendaraan();
 
 
 int main() {
@@ -193,6 +194,7 @@ int main() {
                         cout << "5. Booking Kendaraan" << endl;
                         cout << "6. Struk Transaksi Saya" << endl;
                         cout << "7. Lihat Antrian Booking" << endl;
+                        cout << "8. Cari Kendaraan" << endl;
                         cout << "==========================" << endl;
                         cout << "Masukkan pilihan: ";
                         cin >> menuUtama;
@@ -245,6 +247,9 @@ int main() {
                                 break;
                             case 7:
                                 printQueue();
+                                break;
+                            case 8:
+                                searchKendaraan();
                                 break;
                             default:
                                 cout << "Pilihan tidak valid." << endl;
@@ -946,5 +951,63 @@ void updateKendaraan() {
         cout << "[+] Data motor berhasil diperbarui.\n";
     } else {
         cout << "[!] Pilihan tidak valid.\n";
+    }
+}
+
+void searchKendaraan() {
+    cout << "\n==================================== CARI KENDARAAN =================================\n";
+             
+    string namaCari;
+    cout << "Masukkan nama kendaraan yang dicari: ";
+    getline(cin, namaCari);
+
+    bool ditemukan = false;
+
+    Mobil* tempMobil = headMobil;
+    int indexMobil = 0;
+    while (tempMobil != nullptr) {
+        if (tempMobil->nama == namaCari) {
+            cout << "\n Data ditemukan di kategori MOBIL " << endl;
+            cout << "+----------------------+-----------------+-----------------+------------------+-------+\n";
+            cout << "| Nama Kendaraan       | Model           | Kategori        | Harga/Hari       | Stok  |\n";
+            cout << "+----------------------+-----------------+-----------------+------------------+-------+\n";
+            cout << "| " << left << setw(21) << tempMobil->nama
+                 << "| " << setw(16) << tempMobil->model
+                 << "| " << setw(16) << tempMobil->kategori
+                 << "| Rp." << right << setw(13) << fixed << setprecision(0) << tempMobil->Harga
+                 << " | " << setw(5) << tempMobil->stok << " |\n";
+            cout << "+----------------------+-----------------+-----------------+------------------+-------+\n";
+            ditemukan = true;
+            break; 
+        }
+        tempMobil = tempMobil->next;
+        indexMobil++;
+    }
+    if (!ditemukan) {
+        Motor* tempMotor = headMotor;
+        int indexMotor = 0;
+        while (tempMotor != nullptr) {
+            if (tempMotor->nama == namaCari) {
+                cout << "\n Data ditemukan di kategori MOTOR "<< endl;
+                cout << "+----------------------+-----------------+-----------------+------------------+-------+\n";
+                cout << "| Nama Kendaraan       | Model           | Kategori        | Harga/Hari       | Stok  |\n";
+                cout << "+----------------------+-----------------+-----------------+------------------+-------+\n";
+                cout << "| " << left << setw(21) << tempMotor->nama
+                     << "| " << setw(16) << tempMotor->model
+                     << "| " << setw(16) << tempMotor->kategori
+                     << "| Rp." << right << setw(13) << fixed << setprecision(0) << tempMotor->Harga
+                     << " | " << setw(5) << tempMotor->stok << " |\n";
+                cout << "+----------------------+-----------------+-----------------+------------------+-------+\n";
+                ditemukan = true;
+                break;
+            }
+            tempMotor = tempMotor->next;
+            indexMotor++;
+        }
+    }
+
+    // Statement jika data tidak ditemukan di kedua kategori
+    if (!ditemukan) {
+        cout << "\n kendaraan dengan nama \"" << namaCari << "\" tidak ditemukan pada data kami." << endl;
     }
 }
