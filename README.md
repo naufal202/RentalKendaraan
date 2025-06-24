@@ -1,5 +1,5 @@
 # RentalKendaraan
-poject in console
+project in console
 
 i create this the project for the end task from subject struktur data from my lecture
 
